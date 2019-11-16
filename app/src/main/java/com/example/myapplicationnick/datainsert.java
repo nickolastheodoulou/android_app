@@ -41,6 +41,6 @@ public class datainsert extends AppCompatActivity
                 Toast.makeText(datainsert.this, "Data inserted sucessfully", Toast.LENGTH_LONG).show();
             }
         });
-
+        // test
     }
 }
