@@ -4,8 +4,10 @@
     <string name="age">Enter Your Age</string>
     <string name="button">Submit Now</string>
     <string name="don_t_remember_password">Don\'t Remember password?</string>
-    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="dont_have_an_account">Don\'t have an account? Sign Up here</string>
     <string name="sign_in_with_facebook">Sign in with Facebook</string>
+    <string name='email'>Enter Your Email Address</string>
+    <string name='password'>Enter Your Password</string>
     <string name="logo"> </string>
     <string name="or">or</string>
 </resources>
