@@ -22,6 +22,7 @@ public class SignupActivity extends AppCompatActivity {
     TextView tvSignIn;
     FirebaseAuth mFirebaseAuth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
