@@ -1,31 +1,37 @@
 package com.example.myapplicationnick;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.view.View;
-
-
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class datainsert extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
 {
     EditText txtname, txtage, txtphone, txtheight;
     Button btnsave;
     DatabaseReference reff;
     Member member;
+    Button btnLogout;
+    FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.datainsert);
+        setContentView(R.layout.activity_home);
         txtname=(EditText)findViewById(R.id.txtname);
         txtage=(EditText)findViewById(R.id.txtage);
         btnsave=(Button)findViewById(R.id.btnsave);
+        btnLogout = findViewById(R.id.logout);
         member = new Member();
         reff= FirebaseDatabase.getInstance().getReference().child("Member");
         btnsave.setOnClickListener(new View.OnClickListener()
@@ -38,7 +44,16 @@ public class datainsert extends AppCompatActivity
                 member.setName(txtname.getText().toString().trim());
                 member.setAge(txtage.getText().toString().trim());
                 reff.push().setValue(member);
-                Toast.makeText(datainsert.this, "Data inserted sucessfully", Toast.LENGTH_LONG).show();
+                Toast.makeText(HomeActivity.this, "Data inserted sucessfully", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intToMain = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intToMain);
             }
         });
     }
