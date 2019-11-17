@@ -22,7 +22,7 @@ public class datainsert extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_datainsert);
+        setContentView(R.layout.datainsert);
         txtname=(EditText)findViewById(R.id.txtname);
         txtage=(EditText)findViewById(R.id.txtage);
         btnsave=(Button)findViewById(R.id.btnsave);
@@ -41,6 +41,5 @@ public class datainsert extends AppCompatActivity
                 Toast.makeText(datainsert.this, "Data inserted sucessfully", Toast.LENGTH_LONG).show();
             }
         });
-        // test
     }
 }
