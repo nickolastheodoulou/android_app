@@ -10,4 +10,6 @@
     <string name='password'>Enter Your Password</string>
     <string name="logo"> </string>
     <string name="or">or</string>
+    <string name="facebook_app_id">533628137478043</string>
+    <string name="fb_login_protocol_scheme">fb533628137478043</string>
 </resources>
