@@ -78,3 +78,6 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 }
+
+// https://www.youtube.com/watch?v=mapLbSKNc6I
+// https://firebase.google.com/docs/auth/android/facebook-login
