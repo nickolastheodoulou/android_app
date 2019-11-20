@@ -11,6 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.facebook.CallbackManager;
+import com.facebook.login.LoginResult;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import android.util.Log;
+
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -22,17 +29,26 @@ public class SignupActivity extends AppCompatActivity {
     TextView tvSignIn;
     FirebaseAuth mFirebaseAuth;
 
+    // section on FaceBook login
+    private CallbackManager mCallbackManager;
+    private static final String TAG = "FACELOG";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // FacebookSdk.sdkInitialize(this.getApplicationContext());
         setContentView(R.layout.activity_signup);
+
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         emailId = findViewById(R.id.txtemail);
         password = findViewById(R.id.txtpassword);
         btnSignUp = findViewById(R.id.button);
         tvSignIn = findViewById(R.id.textView);
+
+
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,8 +92,42 @@ public class SignupActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        // Initialize Facebook Login button
+        mCallbackManager = CallbackManager.Factory.create();
+        LoginButton loginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // handleFacebookAccessToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+                Log.d(TAG, "facebook:onCancel");
+                // ...
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                Log.d(TAG, "facebook:onError", error);
+                // ...
+            }
+        });
+// ...
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Pass the activity result back to the Facebook SDK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }
 
 // https://www.youtube.com/watch?v=mapLbSKNc6I
 // https://firebase.google.com/docs/auth/android/facebook-login
+// 22 min un
