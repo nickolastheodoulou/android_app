@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.facebook.CallbackManager;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -28,6 +29,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+import java.util.Arrays;
+
 
 public class SignupActivity extends AppCompatActivity {
     EditText emailId, password;
@@ -38,6 +44,8 @@ public class SignupActivity extends AppCompatActivity {
     // section on FaceBook login
     private CallbackManager mCallbackManager;
     private static final String TAG = "FACELOG";
+
+    Button mFacebookBtn;
 
 
     @Override
@@ -52,6 +60,10 @@ public class SignupActivity extends AppCompatActivity {
         password = findViewById(R.id.txtpassword);
         btnSignUp = findViewById(R.id.button);
         tvSignIn = findViewById(R.id.textView);
+
+        // Initialize Facebook Login button
+        mFacebookBtn = (Button) findViewById(R.id.facebook_login_2);
+        mCallbackManager = CallbackManager.Factory.create();
 
 
 
@@ -100,26 +112,31 @@ public class SignupActivity extends AppCompatActivity {
         });
 
 
-        // Initialize Facebook Login button
-        mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = findViewById(R.id.fb_login_button);
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // handleFacebookAccessToken(loginResult.getAccessToken());
-            }
 
-            @Override
-            public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // ...
-            }
 
+
+        mFacebookBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // ...
+            public void onClick(View view) {
+                LoginManager.getInstance().logInWithReadPermissions(SignupActivity.this, Arrays.asList("email", "public_profile"));
+                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Log.d(TAG, "facebook:onCancel");
+                        // ...
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Log.d(TAG, "facebook:onError", error);
+                        // ...
+                    }
+                });
             }
         });
 
@@ -145,7 +162,7 @@ public class SignupActivity extends AppCompatActivity {
     private void updateUI()
     {
         Toast.makeText(SignupActivity.this, "You're logged in", Toast.LENGTH_LONG).show();
-        Intent accountIntent = new Intent(SignupActivity.this, HomeActivity.class);
+        Intent accountIntent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(accountIntent);
         finish();
     }
@@ -177,6 +194,7 @@ public class SignupActivity extends AppCompatActivity {
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignupActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+
                         }
 
                         // ...
@@ -188,4 +206,4 @@ public class SignupActivity extends AppCompatActivity {
 
 // https://www.youtube.com/watch?v=mapLbSKNc6I
 // https://firebase.google.com/docs/auth/android/facebook-login
-// 22 min un
+// 28 min un
