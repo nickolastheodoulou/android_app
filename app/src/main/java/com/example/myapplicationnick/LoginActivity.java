@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         emailId = findViewById(R.id.txtemail);
         password = findViewById(R.id.txtpassword);
         btnSignIn = findViewById(R.id.button);
-        tvSignUp = findViewById(R.id.textView);
+        tvSignUp = findViewById(R.id.go_to_sign_in);
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override

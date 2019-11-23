@@ -22,15 +22,11 @@ import com.google.firebase.auth.FacebookAuthProvider;
 
 import com.google.firebase.auth.AuthCredential;
 
-import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
 
@@ -45,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
     private CallbackManager mCallbackManager;
     private static final String TAG = "FACELOG";
 
-    Button mFacebookBtn;
+    TextView tvFacebook;
 
 
     @Override
@@ -59,10 +55,10 @@ public class SignupActivity extends AppCompatActivity {
         emailId = findViewById(R.id.txtemail);
         password = findViewById(R.id.txtpassword);
         btnSignUp = findViewById(R.id.button);
-        tvSignIn = findViewById(R.id.textView);
+        tvSignIn = findViewById(R.id.go_to_sign_in);
 
         // Initialize Facebook Login button
-        mFacebookBtn = (Button) findViewById(R.id.facebook_login_2);
+        tvFacebook = findViewById(R.id.facebook_login);
         mCallbackManager = CallbackManager.Factory.create();
 
 
@@ -115,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
 
-        mFacebookBtn.setOnClickListener(new View.OnClickListener() {
+        tvFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LoginManager.getInstance().logInWithReadPermissions(SignupActivity.this, Arrays.asList("email", "public_profile"));
