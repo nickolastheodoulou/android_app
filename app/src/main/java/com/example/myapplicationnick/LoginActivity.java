@@ -38,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     TextView tvSignUp;
     FirebaseAuth mAuth;
     TextView tvFacebook;
+    TextView tvForgotPassword;
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -57,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.txtpassword);
         btnSignIn = findViewById(R.id.button);
         tvSignUp = findViewById(R.id.go_to_sign_in);
+
+        tvForgotPassword = findViewById(R.id.forgot_password);
 
         tvFacebook = findViewById(R.id.facebook_login);
         mCallbackManager = CallbackManager.Factory.create();
@@ -118,6 +121,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intSignUp = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intSignUp);
+            }
+        });
+
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intSignUp = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intSignUp);
             }
         });
