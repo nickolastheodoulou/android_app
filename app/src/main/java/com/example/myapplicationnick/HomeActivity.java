@@ -19,9 +19,10 @@ public class HomeActivity extends AppCompatActivity
     DatabaseReference reff;
     Member member;
     Button btnLogout;
-    FirebaseAuth mFirebaseAuth;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
+    private FirebaseAuth mAuth;
+
+    private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +34,10 @@ public class HomeActivity extends AppCompatActivity
         btnsave=(Button)findViewById(R.id.btnsave);
         btnLogout = findViewById(R.id.logout);
         member = new Member();
+
+        mAuth = FirebaseAuth.getInstance();
+
+
         reff= FirebaseDatabase.getInstance().getReference().child("Member");
         btnsave.setOnClickListener(new View.OnClickListener()
         {
