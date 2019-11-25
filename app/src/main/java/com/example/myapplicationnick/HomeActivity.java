@@ -37,8 +37,10 @@ public class HomeActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
+        String user_id = mAuth.getCurrentUser().getUid();
 
-        reff= FirebaseDatabase.getInstance().getReference().child("Member");
+        reff = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
+
         btnsave.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -46,9 +48,11 @@ public class HomeActivity extends AppCompatActivity
             {
                 // int agea=Integer.parseInt(txtage.getText().toString().trim());
 
+
+
                 member.setName(txtname.getText().toString().trim());
                 member.setAge(txtage.getText().toString().trim());
-                reff.push().setValue(member);
+                reff.setValue(member);
                 Toast.makeText(HomeActivity.this, "Data inserted sucessfully", Toast.LENGTH_LONG).show();
             }
         });

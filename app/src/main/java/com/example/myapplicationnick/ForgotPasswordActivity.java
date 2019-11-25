@@ -43,7 +43,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 firebaseAuth.sendPasswordResetEmail(userEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful())
+                        if(!task.isSuccessful())
                         {
                             Toast.makeText(ForgotPasswordActivity.this, "Password send to your email", Toast.LENGTH_LONG).show();
                         }
