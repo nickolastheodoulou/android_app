@@ -35,7 +35,7 @@
     <string name="logout">LogOut</string>
     <string name="profile_image">profile image</string>
     <string name="no_more_people_to_show">No more People to show…</string>
-    <string name="forgot_password">Don\'t Remember Password</string>
+    <string name="forgot_password">Don\'t Remember Password?</string>
     <string name="register">Register</string>
     <string name="edit">edit</string>
     <string name="settings">settings</string>
